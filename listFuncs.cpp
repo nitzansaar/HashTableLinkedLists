@@ -3,29 +3,28 @@
 // CSCI 455 PA5
 // Fall 2024
 
+// listFuncs.cpp
+// Implementation of the linked list functions
 
 #include <iostream>
-
 #include <cassert>
-
 #include "listFuncs.h"
 
 using namespace std;
 
+// Node constructor
 Node::Node(const string &theKey, int theValue) {
    key = theKey;
    value = theValue;
    next = NULL;
 }
 
+// Node constructor with next pointer
 Node::Node(const string &theKey, int theValue, Node *n) {
    key = theKey;
    value = theValue;
    next = n;
 }
-
-
-
 
 //*************************************************************************
 // put the function definitions for your list functions below
