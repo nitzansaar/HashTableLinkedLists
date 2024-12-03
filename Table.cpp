@@ -25,28 +25,32 @@ Table::Table(unsigned int hSize) : hashSize(hSize) {
     hashTable = new ListType[hashSize]();  // Initialize all entries to NULL
 }
 
-// returns the address of the value that goes with this key
-// or NULL if key is not present
-int * Table::lookup(const string &key) {
+// returns the pointer to the value that goes with this key
+// or NULL if key is not present.
+int* Table::lookup(const string &key) {
     unsigned int hashVal = hashCode(key);
-    Node *found = findNode(hashTable[hashVal], key);
-    if (found == NULL) {
-        return NULL;
-    }
-    return &(found->value);
+    Node* found = findNode(hashTable[hashVal], key);
+    return found ? &(found->value) : NULL;
 }
 
 // remove a pair given its key
-// return false iff key wasn't present
+// returns true iff found and removed
 bool Table::remove(const string &key) {
     unsigned int hashVal = hashCode(key);
     return removeNode(hashTable[hashVal], key);
 }
 
 // insert a new pair into the table
-// return false iff this key was already present
+// returns true iff new entry inserted successfully
 bool Table::insert(const string &key, int value) {
     unsigned int hashVal = hashCode(key);
+    
+    // Check if key already exists
+    if (lookup(key) != NULL) {
+        return false;
+    }
+    
+    // Insert at front of list for this hash value
     return insertFront(hashTable[hashVal], key, value);
 }
 
