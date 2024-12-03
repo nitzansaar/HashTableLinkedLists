@@ -66,7 +66,7 @@ int Table::numEntries() const {
 // print out all the entries in the table, one per line
 void Table::printAll() const {
     for (unsigned int i = 0; i < hashSize; i++) {
-        if (hashTable[i] != NULL) {
+        if (hashTable[i] != NULL) {  // Only print non-empty buckets
             printList(hashTable[i]);
         }
     }
